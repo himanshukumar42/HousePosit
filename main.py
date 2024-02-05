@@ -3,35 +3,13 @@ from dash import html, dcc, Dash, callback, Input, Output
 import plotly.express as px
 import pandas as pd
 import dash_bootstrap_components as dbc
-from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LinearRegression
 from urllib.parse import urlparse
 import flask
 import requests
 
+from tasks import get_predicted_price
+
 house_price_df = pd.read_csv("data.csv")
-
-
-X = house_price_df[
-    [
-        "bedrooms",
-        "bathrooms",
-        "sqft_living",
-        "sqft_lot",
-        "floors",
-        "waterfront",
-        "view",
-        "condition",
-    ]
-]
-y = house_price_df["price"]
-
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=42
-)
-
-model = LinearRegression()
-model.fit(X_train, y_train)
 
 
 def create_histogram(col_name):
@@ -305,20 +283,8 @@ def update_bar(avg_drop):
 def update_predicted_price(
     bedrooms, bathrooms, sqft_living, sqft_lot, floors, waterfront, view, condition
 ):
-    predicted_price = model.predict(
-        [
-            [
-                bedrooms,
-                bathrooms,
-                sqft_living,
-                sqft_lot,
-                floors,
-                waterfront,
-                view,
-                condition,
-            ]
-        ]
-    )[0]
+    predicted_price = get_predicted_price(house_price_df, bedrooms, bathrooms, sqft_living, sqft_lot, floors,
+                                         waterfront, view, condition)
     return f"Predicted Price: ${predicted_price:.2f}"
 
 
