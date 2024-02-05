@@ -1,0 +1,12 @@
+{
+    "http://52.66.134.63/": {
+        "server_url": "http://52.66.134.63/",
+        "filename": "/Users/himanshu/Documents/HousePosit",
+        "app_url": "http://52.66.134.63/content/facd379e-1cb9-480f-9f01-e63a678bd19c/",
+        "app_id": "facd379e-1cb9-480f-9f01-e63a678bd19c",
+        "app_guid": "facd379e-1cb9-480f-9f01-e63a678bd19c",
+        "title": "HousePosit",
+        "app_mode": "python-dash",
+        "app_store_version": 1
+    }
+}
